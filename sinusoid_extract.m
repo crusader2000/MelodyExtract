@@ -2,7 +2,7 @@ function [IA,IF] = sinusoid_extract(orig_sig,fs,num_peaks)
 
     close all;
     % clear all;
-    clc;
+    % clc;
     
     linewidth=2;	% width of lines to plot in graphs
    
@@ -57,7 +57,8 @@ function [IA,IF] = sinusoid_extract(orig_sig,fs,num_peaks)
     spect_phase = get(spectrum,'Phase');
     spect_intensity = spect_intensity{1}{1};
     spect_phase = spect_phase{1}{1};
-        
+    
+    % contourf(abs(spect_intensity));
     % Local Maxima - K
     % Spectral peaks - P
     [P,K] = maxk(spect_intensity,num_peaks);
@@ -81,9 +82,17 @@ function [IA,IF] = sinusoid_extract(orig_sig,fs,num_peaks)
             IA(:,ii) = P(:,ii)./(2*w(mod(N+round(bin_offset(spect_phase(K(:,ii),ii),0,K(:,ii),N,H)),N)));
         else
             IF(:,ii) = (K(:,ii) + bin_offset(spect_phase(K(:,ii),ii),spect_phase(K(:,ii),ii-1),K(:,ii),N,H))*(fs/N);
-            IA(:,ii) = P(:,ii)./(2*w(mod(N+round(bin_offset(spect_phase(K(:,ii),ii),spect_phase(K(:,ii),ii-1),K(:,ii),N,H)),N)));
+            % fprintf("Length of w %d \n",length(w));
+            % fprintf("accessed_index %d \n",mod(N+round(bin_offset(spect_phase(K(:,ii),ii),spect_phase(K(:,ii),ii-1),K(:,ii),N,H)),N));
+            IA(:,ii) = P(:,ii)./(2*w(mod(N+round(bin_offset(spect_phase(K(:,ii),ii),spect_phase(K(:,ii),ii-1),K(:,ii),N,H)),N)+1));
         end
     end 
+    % disp("num_frames");
+    % disp(num_frames);
+    % disp("sum(sum(IF~=0))");
+    % disp(sum(sum(IF~=0)));
+    % disp("sum(sum(IA~=0))");
+    % disp(sum(sum(IA~=0)));
 end
 
 function offset = bin_offset(a,b,k,N,H)
