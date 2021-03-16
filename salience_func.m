@@ -25,18 +25,38 @@ function [S] = salience_func(IA,IF,Nh)
     threshold = 8;
     alpha = 1;
     mag_comp = 2;
-
+    disp("num_frames");
+    disp(N);
     for frame_num = 1:N
         aM = max(IA(:,frame_num));
         for b = 1:600
             for h = 1:Nh
-                % disp(mag_threshold(aM,IA(:,frame_num),threshold).*weighting_func(b,h,IF(:,frame_num),B(floor(IF(:,frame_num)/h)),alpha).*power(IA(:,frame_num),mag_comp));
-                S(b,frame_num) = sum(mag_threshold(aM,IA(:,frame_num),threshold).*weighting_func(b,h,IF(:,frame_num),B(floor(IF(:,frame_num)/h)),alpha).*power(IA(:,frame_num),mag_comp));
+                % disp(class(weighting_func(b,h,IF(:,frame_num),B(floor(IF(:,frame_num)/h)),alpha).*power(IA(:,frame_num),mag_comp)));
+                % disp(class(mag_threshold(aM,IA(:,frame_num),threshold)));
+                % disp(double(mag_threshold(aM,IA(:,frame_num),threshold)).*double(weighting_func(b,h,IF(:,frame_num),B(floor(IF(:,frame_num)/h)),alpha).*power(IA(:,frame_num),mag_comp)));
+                temp1 = mag_threshold(aM,IA(:,frame_num),threshold);
+                temp2 = weighting_func(b,h,IF(:,frame_num),B(floor(IF(:,frame_num)/h)),alpha);
+                temp3 = power(IA(:,frame_num),mag_comp);
+                % disp(temp1);
+                % disp(temp2);
+                % disp(temp3);
+                disp("")
+                % for ii = 1:length(temp1)
+                S(b,frame_num) = sum(double(temp1).*double(temp2).*double(temp3));
+                % if S(b,frame_num) == NaN
+                %     disp(temp1);
+                %     disp(temp2);
+                %     disp(temp3);
+                %     disp("")
+                % end
+                % S(b,frame_num) = sum(mag_threshold(aM,IA(:,frame_num),threshold).*weighting_func(b,h,IF(:,frame_num),B(floor(IF(:,frame_num)/h)),alpha)'*power(IA(:,frame_num),mag_comp));
             end
         end
     end
-    % save("S.mat",'S');
+    save("S.mat",'S');
     % disp(S);
+    disp("sum(sum(S~=0))");
+    disp(sum(sum(S~=0)));
     % contourf(S);
 end
 
@@ -49,6 +69,8 @@ end
 function val = weighting_func(b,h,f,bin,alpha)    
     if length(f) > 1
         val = zeros(size(f));
+        % disp("val");
+        % disp(val);
     else 
         val = 0;
     end
