@@ -34,8 +34,20 @@ disp(cutoff2);
 loc_filtered2 = (peaks_out >= cutoff2);
 peaks_out2 = loc_filtered2.*S;
 
-S_plus = loc_filtered2.*1;
-S_minus = (S>0).*1 - S_plus;
-contourf(S_plus);
-figure;
-contourf(S_minus);
+S_plus_loc = loc_filtered2.*1;  
+S_minus_loc = (S>0).*1 - S_plus_loc;
+
+S_plus = S.*S_plus_loc;
+S_minus = S.*S_minus_loc;
+
+
+
+
+
+
+
+
+
+
+
+

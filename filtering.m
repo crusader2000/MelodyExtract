@@ -31,6 +31,9 @@ filt_sig=filter(Bb,Ab,iterm_sig);
 fprintf("Length of audio signal - %d\n",length(orig_sig));
 fprintf("Length of filtered signal - %d\n",length(filt_sig));
 
+% a = fft(orig_sig);
+% e = fft(filt_sig);
+
 % plot(1:length(a),a(:,1),1:length(e),e(:,1));
 % figure;
 % stem(1:length(a),fftshift(abs(fft(a(:,1)))));
@@ -39,9 +42,9 @@ fprintf("Length of filtered signal - %d\n",length(filt_sig));
 % figure;
 % plot(1:length(a),a(:,2),1:length(e),e(:,2));
 % figure;
-% stem(1:length(a),fftshift(abs(fft(a(:,2)))));
+% stem(1:length(a),fftshift(abs(a(:,2))));
 % hold on;
-% stem(1:length(e),fftshift(abs(fft(e(:,2)))));
+% stem(1:length(e),fftshift(abs(e(:,2))));
 
 % p = audioplayer(filt_sig, fs);
 % play(p)

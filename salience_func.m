@@ -17,9 +17,9 @@ function [S] = salience_func(IA,IF,Nh)
         end
     end
     
-    bins = 1:600;
+    % bins = 1:600;
 
-    S = zeros(600,N);
+    S = zeros(size(IF));
 
     % PARAMETERS
     threshold = 8;
@@ -29,7 +29,8 @@ function [S] = salience_func(IA,IF,Nh)
     disp(N);
     for frame_num = 1:N
         aM = max(IA(:,frame_num));
-        for b = 1:600
+        for iii = 1:I
+            b = B(iii,frame_num);
             for h = 1:Nh
                 % disp(class(weighting_func(b,h,IF(:,frame_num),B(floor(IF(:,frame_num)/h)),alpha).*power(IA(:,frame_num),mag_comp)));
                 % disp(class(mag_threshold(aM,IA(:,frame_num),threshold)));
@@ -42,7 +43,7 @@ function [S] = salience_func(IA,IF,Nh)
                 % disp(temp3);
                 disp("")
                 % for ii = 1:length(temp1)
-                S(b,frame_num) = sum(double(temp1).*double(temp2).*double(temp3));
+                S(iii,frame_num) = sum(double(temp1).*double(temp2).*double(temp3));
                 % if S(b,frame_num) == NaN
                 %     disp(temp1);
                 %     disp(temp2);

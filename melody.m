@@ -1,7 +1,7 @@
 function mel = melody(filename)
     [orig_sig, fs]=audioread(filename);
 
-    seg_length = 2*fs;
+    seg_length = 4*fs;
     segments = length(orig_sig)/seg_length;
     num_peaks = 1; % No. of peaks considered in Sinusoid Extraction
     Nh = 5; % No. of Harmonics considered in Salience Function
