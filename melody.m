@@ -1,12 +1,13 @@
 function mel = melody(filename)
     [orig_sig, fs]=audioread(filename);
 
-    seg_length = 4*fs;
+    seg_length = fs;
     segments = length(orig_sig)/seg_length;
-    num_peaks = 1; % No. of peaks considered in Sinusoid Extraction
-    Nh = 5; % No. of Harmonics considered in Salience Function
-    
+    num_peaks = 3; % No. of peaks considered in Sinusoid Extraction
+    Nh = 3; % No. of Harmonics considered in Salience Function
     segments = 1;
+    length_frame = 8192;
+    length_hop = 128;
     for ii = 1:segments
         fprintf('Calculating the melody for Segment- %d out of %d segments\n',ii,segments);
         
@@ -18,7 +19,10 @@ function mel = melody(filename)
         % Salience Function
         S = salience_func(IA,IF,Nh);
         disp("size(S)");
-        disp(size(S));
+        save("S.mat",'S');
+        % disp(size(S));
+        % final_contour  = pitch_contours(S,seg_length,length_frame,length_hop);
+        final_contour  = pitch_contours(S);
         % disp(S);
     end
 end

@@ -8,7 +8,7 @@ IF = load('amplitude.mat').IF;
 
 
 % Salience Peaks per frames
-N = 3367 % Num frames
+N = size(IF,2) % Num frames
 % To handle NaN
 S(S>=0 == 0) = 0;
 mean_all = mean(mean(S));
@@ -40,8 +40,12 @@ S_minus_loc = (S>0).*1 - S_plus_loc;
 S_plus = S.*S_plus_loc;
 S_minus = S.*S_minus_loc;
 
-
-
+close all;
+% contour((S>0).*1); colorbar;
+% figure;
+% contour(S_minus_loc); colorbar;
+% hold on;
+contour(S_plus_loc); colorbar;
 
 
 

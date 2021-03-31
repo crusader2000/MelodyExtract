@@ -48,11 +48,12 @@ function [IA,IF] = sinusoid_extract(orig_sig,fs,num_peaks)
     
     audiowrite('filtered_sig.wav',filt_sig,fs);
     
-    
+    disp("length(filt_sig)");
+    disp(length(filt_sig));
     %%%%%%%%%%%%
     % Get the  STFT
     %%%%%%%%%%%%
-    spectrum = mirspectrum('filtered_sig.wav','Frame',0.1857596,0.0029,'ZeroPad',4,'Window','hann');
+    spectrum = mirspectrum('filtered_sig.wav','Frame',8192,'sp',128,'sp','ZeroPad',4,'Window','hann');
     spect_intensity = get(spectrum,'Magnitude');
     spect_phase = get(spectrum,'Phase');
     spect_intensity = spect_intensity{1}{1};
