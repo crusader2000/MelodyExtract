@@ -12,9 +12,9 @@ function [S] = salience_func(IA,IF,Nh)
     S = zeros(num_bins,N);
 
     % PARAMETERS
-    threshold = 8;
-    alpha = 1;
-    mag_comp = 2;
+    threshold = 40;
+    alpha = 0.8;
+    mag_comp = 1;
     disp("num_frames");
     disp(N);
     for frame_num = 1:N

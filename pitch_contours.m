@@ -26,8 +26,8 @@ function final_contour = pitch_contours(S)
     mean_s = mean(S(loc_filtered));
     std_s = std(S(loc_filtered));
 
-    tau_sigma = 0;
-    % tau_sigma = 0.001;
+    % tau_sigma = 0;
+    tau_sigma = 0.001;
     cutoff2 = mean_s - tau_sigma*std_s;
     disp("cutoff2");
     disp(cutoff2);
@@ -56,11 +56,11 @@ function final_contour = pitch_contours(S)
     % Select the highest peak in S+
     % Find a peak in the next frame in the 8 bins around the previous peak
 
-    final_contour = cell(40,4);
+    final_contour = cell(50,4);
     count = 1;
 
-    % while max(max(S_plus)) ~= -1
-    for unknown = 1:40
+    while max(max(S_plus)) ~= -1
+    % for unknown = 1:40
         [S1,I1] = max(S_plus);
         [S2,I2] = max(S1);
         % fprintf("S2 - %d\n",S2);

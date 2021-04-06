@@ -4,7 +4,7 @@ function mel = melody(filename)
     seg_length = fs;
     segments = length(orig_sig)/seg_length;
     num_peaks = 3; % No. of peaks considered in Sinusoid Extraction
-    Nh = 3; % No. of Harmonics considered in Salience Function
+    Nh = 8; % No. of Harmonics considered in Salience Function
     segments = 1;
     length_frame = 8192;
     length_hop = 128;
@@ -23,6 +23,8 @@ function mel = melody(filename)
         % disp(size(S));
         % final_contour  = pitch_contours(S,seg_length,length_frame,length_hop);
         final_contour  = pitch_contours(S);
+        final_contour_characteristics = contour_characteristics(final_contour);
+        save("final_contour.mat",'final_contour','final_contour_characteristics');
         % disp(S);
     end
 end

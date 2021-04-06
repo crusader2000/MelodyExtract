@@ -24,7 +24,7 @@ function final_contour_characteristics = contour_characteristics(final_contour)
         final_contour_characteristics{ii,4} = salience_total;
         final_contour_characteristics{ii,5} = salience_std;
         final_contour_characteristics{ii,6} = contour_length;
-        final_contour_characteristics{ii,7} = vibrato;
+        final_contour_characteristics{ii,7} = int64(vibrato);
         % pause(1);
     end
 
