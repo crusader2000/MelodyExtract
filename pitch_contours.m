@@ -56,7 +56,7 @@ function final_contour = pitch_contours(S)
     % Select the highest peak in S+
     % Find a peak in the next frame in the 8 bins around the previous peak
 
-    final_contour = cell(50,4);
+    final_contour = cell(1,4);
     count = 1;
 
     while max(max(S_plus)) ~= -1
