@@ -1,5 +1,5 @@
-function final_contour = pitch_contours(S)
-    % function final_contour = pitch_contours(S,length_segment,length_frame,length_hop)
+function raw_contour = pitch_contours(S)
+    % function raw_contour = pitch_contours(S,length_segment,length_frame,length_hop)
     % length_segment = 44100;
     % length_frame = 8192; % fs*46.4ms
     % length_hop = 128;
@@ -56,7 +56,7 @@ function final_contour = pitch_contours(S)
     % Select the highest peak in S+
     % Find a peak in the next frame in the 8 bins around the previous peak
 
-    final_contour = cell(1,4);
+    raw_contour = cell(1,4);
     count = 1;
 
     while max(max(S_plus)) ~= -1
@@ -228,17 +228,17 @@ function final_contour = pitch_contours(S)
             contour_start = 1;
         end
         % if count == 1
-        %     final_contour = {contour_start,contour_end,salience_contour,pitch_contour};
+        %     raw_contour = {contour_start,contour_end,salience_contour,pitch_contour};
         % else
-        %     final_contour = {final_contour;{contour_start,contour_end,salience_contour,pitch_contour}};
+        %     raw_contour = {raw_contour;{contour_start,contour_end,salience_contour,pitch_contour}};
         % end
 
-        final_contour{count,1} = contour_start;
-        final_contour{count,2} = contour_end;
-        final_contour{count,3} = pitch_contour;
-        final_contour{count,4} = salience_contour;
-        % final_contour{count,5} = length(salience_contour);
-        % final_contour{count,6} = length(pitch_contour);
+        raw_contour{count,1} = contour_start;
+        raw_contour{count,2} = contour_end;
+        raw_contour{count,3} = pitch_contour;
+        raw_contour{count,4} = salience_contour;
+        % raw_contour{count,5} = length(salience_contour);
+        % raw_contour{count,6} = length(pitch_contour);
         count = count + 1;
     end
 

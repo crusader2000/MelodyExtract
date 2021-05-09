@@ -21,10 +21,12 @@ function mel = melody(filename)
         disp("size(S)");
         save("S.mat",'S');
         % disp(size(S));
-        % final_contour  = pitch_contours(S,seg_length,length_frame,length_hop);
-        final_contour  = pitch_contours(S);
-        final_contour_characteristics = contour_characteristics(final_contour);
-        save("final_contour.mat",'final_contour','final_contour_characteristics');
+        % raw_contour  = pitch_contours(S,seg_length,length_frame,length_hop);
+        raw_contour  = pitch_contours(S);
+        raw_contour_characteristics = contour_characteristics(raw_contour);
+        save("raw_contour.mat",'raw_contour','raw_contour_characteristics');
+
+        % melody_audio = get_audio(melody_contour,seg_length,length_frame,length_hop);
         % disp(S);
     end
 end
