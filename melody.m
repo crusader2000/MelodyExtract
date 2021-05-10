@@ -6,7 +6,8 @@ function mel = melody(filename)
     num_peaks = 3; % No. of peaks considered in Sinusoid Extraction
     Nh = 8; % No. of Harmonics considered in Salience Function
     segments = 1;
-    length_frame = 8192;
+    % length_frame = 8192;
+    length_frame = 2048;
     length_hop = 128;
     for ii = 1:segments
         fprintf('Calculating the melody for Segment- %d out of %d segments\n',ii,segments);
@@ -25,6 +26,9 @@ function mel = melody(filename)
         raw_contour  = pitch_contours(S);
         raw_contour_characteristics = contour_characteristics(raw_contour);
         save("raw_contour.mat",'raw_contour','raw_contour_characteristics');
+
+        filtered_contours = melody_selection(raw_contour,raw_contour_characteristics);
+        save("filtered_contours.mat",'filtered_contours');
 
         % melody_audio = get_audio(melody_contour,seg_length,length_frame,length_hop);
         % disp(S);
